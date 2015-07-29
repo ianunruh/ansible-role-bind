@@ -1,0 +1,17 @@
+bind_forwarders: []
+
+bind_allow_recursion:
+  - 10.0.0.0/8
+  - 172.16.0.0/12
+  - 192.168.0.0/16
+  - localhost
+
+bind_allow_transfer: []
+
+bind_allow_new_zones: true
+
+bind_listen_on:
+  - any
+
+bind_listen_on_v6:
+  - any

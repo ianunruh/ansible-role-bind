@@ -1,0 +1,27 @@
+- name: install bind
+  apt:
+    pkg: bind9
+    state: present
+  tags:
+    - bind
+    - bind-install
+
+- name: configure bind
+  template:
+    src: named.conf.options.j2
+    dest: /etc/bind/named.conf.options
+  notify:
+    - restart bind
+  tags:
+    - bind
+    - bind-configure
+
+- name: configure rndc
+  template:
+    src: rndc.conf.j2
+    dest: /etc/bind/rndc.conf
+  tags:
+    - bind
+    - bind-configure
+
+- meta: flush_handlers

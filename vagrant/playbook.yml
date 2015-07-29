@@ -1,0 +1,14 @@
+- hosts: all
+  pre_tasks:
+    - name: update apt cache if stale
+      apt:
+        update_cache: yes
+        cache_valid_time: 7200
+
+  roles:
+    - bind
+
+  vars:
+    bind_forwarders:
+      - 8.8.8.8
+      - 8.8.4.4

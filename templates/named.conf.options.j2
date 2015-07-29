@@ -1,0 +1,46 @@
+include "/etc/bind/rndc.key";
+
+options {
+  directory "/var/cache/bind";
+
+  {% if bind_allow_new_zones %}
+  allow-new-zones yes;
+  {% endif %}
+
+  forwarders {
+    {% for forwarder in bind_forwarders %}
+    {{ forwarder }};
+    {% endfor %}
+  };
+
+  allow-recursion {
+    {% for element in bind_allow_recursion %}
+    {{ element }};
+    {% endfor %}
+  };
+
+  allow-transfer {
+    {% for element in bind_allow_transfer %}
+    {{ element }};
+    {% endfor %}
+  };
+
+  listen-on {
+    {% for element in bind_listen_on %}
+    {{ element }};
+    {% endfor %}
+  };
+
+  listen-on-v6 {
+    {% for element in bind_listen_on_v6 %}
+    {{ element }};
+    {% endfor %}
+  };
+
+  dnssec-validation auto;
+  auth-nxdomain no;
+};
+
+controls {
+  inet 127.0.0.1 allow { localhost; } keys { "rndc-key"; };
+};
