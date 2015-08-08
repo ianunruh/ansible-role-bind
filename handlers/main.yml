@@ -6,4 +6,4 @@
 - name: reload bind
   service:
     name: bind9
-    state: reload
+    state: reloaded
